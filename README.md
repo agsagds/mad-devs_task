@@ -4,6 +4,8 @@
 
 look at data/task.pdf
 
+Note: solution don't except any props for splitable tags
+
 ## How to run
 
 ```bash

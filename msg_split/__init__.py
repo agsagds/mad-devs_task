@@ -1,0 +1,1 @@
+from .split_algo import split_message
