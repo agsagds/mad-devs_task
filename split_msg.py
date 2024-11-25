@@ -19,6 +19,6 @@ if __name__ == '__main__':
         fragment_num = 1
         for fragment in split_message(text, args.max_len):
             print(f'fragment #{fragment_num}: {len(fragment)} chars.')
-            print(fragment[:50], '\n...\n', fragment[-50:])
+            print(fragment)
             fragment_num+=1
     
