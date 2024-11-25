@@ -28,7 +28,7 @@ class Bracket(Chunk):
 @dataclass
 class Options:
     open_brackets: list[Bracket] = field(default_factory=list)
-    header: str = ''
+    closed_brackets: list[Bracket] = field(default_factory=list)
     cursor_pos: int = 0
     chunk_idx: int = 0
     len_close: int = 0
@@ -38,6 +38,7 @@ class Options:
     
     def update_lengths(self) -> None:
         self.len_close = sum((len(b.to_close_tag()) for b in self.open_brackets))
-        self.len_open = sum((len(b.to_open_tag()) for b in self.open_brackets)) + len(self.header)
+        self.len_open = sum((len(b.to_open_tag()) for b in self.open_brackets)) + \
+            sum((len(b.to_open_tag()) for b in self.closed_brackets))
         self.len_open_before_pos = self.len_open - \
             sum((len(b.to_open_tag()) for b in self.open_brackets if b.pos_start >= self.cursor_pos))
