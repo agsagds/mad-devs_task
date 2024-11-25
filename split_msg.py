@@ -1,14 +1,23 @@
+import argparse
 from msg_split import split_message
-import pprint
+from msg_split.const import MAX_LEN
 
-fragment_num = 1
+
+
 
 if __name__ == '__main__':
     
-    max_len = 4296
-    with open('/home/locus/workspace/test-tasks/mad-devs/mad-devs_task/data/source.html') as f:
+    parser = argparse.ArgumentParser(
+                    prog='HTML Fragmentation',
+                    description='Fragmentate HTML to correct HTML chunks')
+    parser.add_argument('--max-length', dest='max_len', required=True, type=int)
+    parser.add_argument('filepath', type=str)
+
+    args = parser.parse_args()
+    with open(args.filepath) as f:
         text = f.read()
-        for fragment in split_message(text, max_len):
+        fragment_num = 1
+        for fragment in split_message(text, args.max_len):
             print(f'fragment #{fragment_num}: {len(fragment)} chars.')
             print(fragment[:50], '\n...\n', fragment[-50:])
             fragment_num+=1
